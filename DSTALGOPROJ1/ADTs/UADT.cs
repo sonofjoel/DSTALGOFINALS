@@ -1,4 +1,4 @@
-﻿namespace DSTALGOPROJ1
+﻿namespace DSTALGOPROJ1.ADTs
 {
     class UADT
     {

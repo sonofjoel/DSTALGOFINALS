@@ -44,7 +44,7 @@ namespace DSTALGOPROJ1
 
                     case 2:
                         Console.Clear();
-                        Console.WriteLine("Your Current Schedule (Most Recent First):");
+                        Console.WriteLine("Your Current Schedule :");
                         if (TotUnits == 0)
                         {
                             Console.WriteLine("No subjects enrolled yet.");
@@ -83,17 +83,10 @@ namespace DSTALGOPROJ1
                             {
                                 string selectedSubject = $"{Subjects[subjectchoice - 1][0]} - {Subjects[subjectchoice - 1][1]} ({Subjects[subjectchoice - 1][2]}) - {Subjects[subjectchoice - 1][3]} units";
 
-                                try
-                                {
-                                    StudentSched.Push(selectedSubject);
-                                    TotUnits += subjectUnits;
-                                    Console.WriteLine($"Successfully added: {selectedSubject}");
-                                    Console.WriteLine($"Total units enrolled: {TotUnits}/21");
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine(ex.Message);
-                                }
+                                StudentSched.Push(selectedSubject);
+                                TotUnits += subjectUnits;
+                                Console.WriteLine($"Successfully added: {selectedSubject}");
+                                Console.WriteLine($"Total units enrolled: {TotUnits}/21");
                             }
                         }
                         else
@@ -105,6 +98,7 @@ namespace DSTALGOPROJ1
                         Console.Clear();
                         DisplayMenu();
                         break;
+
 
                     case 4:
                        //still not sure how we will use this sa app - Joel

@@ -7,18 +7,32 @@
 
         public UADT()
         {
-            int top = -1;
-            array = new object[5];
+            top = -1;
+            array = new object[5]; 
         }
 
         public void Push(object item)
         {
-            if (top < array.Length - 1)
+            if (top >= array.Length - 1)
             {
-                top++;
-                array[top] = item;
+                Resize();
             }
-            else throw new Exception("Stack Overflow...");
+            top++;
+            array[top] = item;
+        }
+
+        private void Resize()
+        {
+            int newSize = array.Length * 2;
+            object[] newArray = new object[newSize];
+
+            for (int i = 0; i <= top; i++)
+            {
+                newArray[i] = array[i];
+            }
+
+            array = newArray;
+          
         }
 
         public object Pop()
@@ -29,37 +43,35 @@
                 top--;
                 return item;
             }
-            else throw new Exception("Stack Underflow");
+            else throw new Exception("No subjects to remove");
         }
 
         public object Peek()
         {
             if (top > -1)
             {
-                object item = array[top];
-
-                return item;
+                return array[top];
             }
-            else throw new Exception("Stack Underflow");
+            else throw new Exception("No subjects enrolled");
         }
 
-        public void clear()
+        public void Clear()
         {
             top = -1;
         }
 
         public void PrintStack()
         {
+            if (top == -1)
+            {
+                Console.WriteLine("No subjects enrolled yet.");
+                return;
+            }
+
             for (int i = top; i >= 0; i--)
             {
                 Console.WriteLine(array[i]);
             }
         }
-
-
-
-
-
-
     }
 }

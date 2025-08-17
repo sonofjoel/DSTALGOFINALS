@@ -33,27 +33,41 @@ public class CustomListClass
         array = newArray;
     }
 
-    public void PrintList() // prints the list using a for loop
+    public void PrintSchedule()
     {
-        if (index < 0)
-        {
-            Console.WriteLine("Schedule Empty");
-            return;
-        }
+        Console.WriteLine("Current Schedule:\n");
 
-        for (int i = 0; i <= index; i++)
+        for (int i = 0; i < 8; i++) // always show 8 slots
         {
-            Console.Write(array[i] + "\t");
+            if (i < index && array[i] != null)
+            {
+                Console.WriteLine($"Slot {i + 1}: {array[i]}");
+            }
+            else
+            {
+                Console.WriteLine($"Slot {i + 1}: Empty");
+            }
         }
-        Console.WriteLine();
     }
 
-    public object GetList()
+    public void ViewSubjectSchedule()
+    {
+        if (index == -1)
+        {
+            Console.WriteLine("No subjects currently enlisted...");
+        }
+        else
+        {
+            Console.WriteLine("Input the number of the specified subject: ");
+        }
+    }
+
+    public string GetList()
     {
         string result = "";
         for (int i = 0; i < index; i++)
         {
-            result += array[i] + " ";
+            result += array[i] + "\n";
         }
         return result.Trim();
     }

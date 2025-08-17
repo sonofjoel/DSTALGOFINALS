@@ -101,9 +101,25 @@ namespace DSTALGOPROJ1
 
 
                     case 4:
-                       //still not sure how we will use this sa app - Joel
+                    //still not sure how we will use this sa app - Joel
+
 
                     case 5:
+                        Console.Clear();
+                        Console.WriteLine("Your Current Schedule :");
+                        if (TotUnits == 0)
+                        {
+                            Console.WriteLine("No subjects enrolled yet.");
+                        }
+                        else
+                        {
+                            StudentSched.PrintStack();
+                        }
+                        Console.WriteLine($"\nTotal Units Enrolled: {TotUnits}/21");
+                        //menu to remove all or subject at the top of stack
+
+                        break;
+                    case 6:
                         Console.Clear();
                         Console.WriteLine("Thank you for using this program!");
                         running = false;
@@ -125,12 +141,15 @@ namespace DSTALGOPROJ1
 
         static void DisplayMenu()
         {
-            Console.WriteLine("-------Welcome to Student Enrollment System (S.E.S)-------");
+            Console.WriteLine("============================================================");
+            Console.WriteLine("======= Welcome to Student Enrollment System (S.E.S) =======");
+            Console.WriteLine("============================================================");
             Console.WriteLine("1: View Subject Schedule");
             Console.WriteLine("2: View Student Schedule");
             Console.WriteLine("3: Add Subjects to Schedule");
             Console.WriteLine("4: Change Year Term and ID");
-            Console.WriteLine("5: Exit Program");
+            Console.WriteLine("5: Remove Subjects");
+            Console.WriteLine("6: Exit Program");
         }
     }
 }

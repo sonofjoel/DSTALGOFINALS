@@ -40,7 +40,8 @@ namespace DSTALGOPROJ1
                 switch (userchoice)
                 {
                     case 1:
-                        MyList.ViewSubjectSchedule();
+                        MyList.ViewSubjectSchedule(Subjects);
+                        
                         break;
                     case 2:
                         MyList.PrintSchedule();

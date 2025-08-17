@@ -50,15 +50,12 @@ public class CustomListClass
         }
     }
 
-    public void ViewSubjectSchedule()
+    public void ViewSubjectSchedule(string[][] subjects)
     {
-        if (index == -1)
+        Console.WriteLine("\n--- Available Subjects to Enroll ---");
+        for (int i = 0; i < subjects.Length; i++)
         {
-            Console.WriteLine("No subjects currently enlisted...");
-        }
-        else
-        {
-            Console.WriteLine("Input the number of the specified subject: ");
+            Console.WriteLine($"{i + 1}. {subjects[i][0]} - {subjects[i][1]}");
         }
     }
 

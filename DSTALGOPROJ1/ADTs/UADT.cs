@@ -11,7 +11,7 @@
             array = new object[5]; 
         }
 
-        public void Push(object item)
+        public void Push(object item) // pushes an item type object into the stack
         {
             if (top >= array.Length - 1)
             {
@@ -21,7 +21,7 @@
             array[top] = item;
         }
 
-        private void Resize()
+        private void Resize() // Resizes the array
         {
             int newSize = array.Length * 2;
             object[] newArray = new object[newSize];
@@ -35,7 +35,7 @@
           
         }
 
-        public object Pop()
+        public object Pop() // Removes the subject
         {
             if (top > -1)
             {

@@ -7,6 +7,7 @@ namespace DSTALGOPROJ1
     {
         static void Main(string[] args)
         {
+            // initialize and create
             bool running = true;
             CustomListClass MyList = new CustomListClass();
             UADT StudentSched = new UADT();
@@ -23,7 +24,7 @@ namespace DSTALGOPROJ1
                 new string[] {"CSBLIFE", "Computer Science and Life", "F 2:40PM - 5:40PM", "2"},
                 new string[] {"NSTP01", "National Service Training Program 1", "T 8:00AM - 11:00AM", "3"},
                 new string[] {"DSTALGO", "Data Structure and Algorithms", "T 11:20AM - 2:20PM", "3"}
-            };
+            }; // Jagged array that stores the subject, full name, day and time
 
             Console.Clear();
             DisplayMenu();
@@ -72,17 +73,17 @@ namespace DSTALGOPROJ1
                         Console.Clear();
                         Console.WriteLine("Please choose a subject to add: ");
 
-                        for (int i = 0; i < Subjects.Length; i++)
+                        for (int i = 0; i < Subjects.Length; i++) // iterates and displayes the subjects
                         {
                             Console.WriteLine($"{i + 1}. {Subjects[i][0]} - {Subjects[i][1]} ({Subjects[i][2]}) - {Subjects[i][3]} units");
-                        }
+                        } // [i] = what subject it is, [0,1,2,3] = the index in the jagged array
 
                         Console.Write("\nUser: ");
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         string input = Console.ReadLine();
                         Console.ResetColor();
 
-                        if (string.IsNullOrWhiteSpace(input))
+                        if (string.IsNullOrWhiteSpace(input)) // checks if the user typed nothing
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("You must enter a number.");
@@ -90,7 +91,7 @@ namespace DSTALGOPROJ1
                             Console.WriteLine("\nPress any key to continue...");
                             Console.ReadKey();
                             Console.Clear();
-                            DisplayMenu();
+                            DisplayMenu(); // calls the method to display the menu
                             break;
                         }
 
@@ -98,16 +99,16 @@ namespace DSTALGOPROJ1
 
                         if (subjectchoice >= 1 && subjectchoice <= Subjects.Length)
                         {
-                            int subjectUnits = Convert.ToInt32(Subjects[subjectchoice - 1][3]);
+                            int subjectUnits = Convert.ToInt32(Subjects[subjectchoice - 1][3]); // -1 because the arrays are zero-basedd
 
-                            if (TotUnits + subjectUnits > 21)
+                            if (TotUnits + subjectUnits > 21) // checks if totalunits are more that 21
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("ERROR!");
                                 Console.ResetColor();
                                 Console.WriteLine($"You can only enlist a maximum of 21 units. Current units: {TotUnits}, \nAttempted to add: {subjectUnits} units.");
                             }
-                            else if (StudentSched.CheckDup(Subjects[subjectchoice - 1][0]))
+                            else if (StudentSched.CheckDup(Subjects[subjectchoice - 1][0])) // checks if its a duplicate via CheckDup() Method
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("You cannot enlist the same subject twice.");
@@ -115,10 +116,10 @@ namespace DSTALGOPROJ1
                             }
                             else
                             {
-                                string selectedSubject = $"{Subjects[subjectchoice - 1][0]} - {Subjects[subjectchoice - 1][1]} ({Subjects[subjectchoice - 1][2]}) - {Subjects[subjectchoice - 1][3]} units";
+                                string selectedSubject = $"{Subjects[subjectchoice - 1][0]} - {Subjects[subjectchoice - 1][1]} ({Subjects[subjectchoice - 1][2]}) - {Subjects[subjectchoice - 1][3]} units"; // converts the selected subbject into string format then pushes into a stack, formats into a single string
 
-                                StudentSched.Push(selectedSubject);
-                                UnitsStack.Push(subjectUnits);
+                                StudentSched.Push(selectedSubject); // pushes into StudentSched
+                                UnitsStack.Push(subjectUnits); // pushes into UnitsStack
                                 TotUnits += subjectUnits;
                                 Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine($"Successfully added: ");
@@ -131,24 +132,21 @@ namespace DSTALGOPROJ1
                                 Console.ResetColor();
                             }
                         }
-                        else
+                        else // error statement when user doesn't type a valid option
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Invalid choice. Please select a valid subject number.");
                             Console.ResetColor();
                         }
-
                         Console.WriteLine("\nPress any key to continue...");
                         Console.ReadKey();
                         Console.Clear();
                         DisplayMenu();
                         break;
-
-
-                    case 4:
+                    case 4: // displaying the current schedule
                         Console.Clear();
                         Console.WriteLine("Your Current Schedule :");
-                        if (TotUnits == 0)
+                        if (TotUnits == 0) // checks if stack is not full
                         {
                             Console.WriteLine("No subjects enlisted yet.");
                             Console.WriteLine("\nPress any key to continue...");
@@ -157,7 +155,7 @@ namespace DSTALGOPROJ1
                             DisplayMenu();
                             break;
                         }
-                        else
+                        else // calls the printstack() method
                         {
                             StudentSched.PrintStack();
                         }
@@ -166,7 +164,7 @@ namespace DSTALGOPROJ1
                         Console.Write(TotUnits);
                         Console.Write("/21");
                         Console.ResetColor();
-                        Console.WriteLine("\nRemove Options:");
+                        Console.WriteLine("\nRemove Options:"); // another switch
                         Console.WriteLine("1: Remove Last Added Subject (Top of Stack)");
                         Console.WriteLine("2: Remove All Subjects");
                         Console.WriteLine("3: Go Back to Main Menu");
@@ -179,7 +177,7 @@ namespace DSTALGOPROJ1
 
                         switch (removeChoice)
                         {
-                            case 1:
+                            case 1: // removes the chosen subject via its index
                                 try
                                 {
                                     object removedSubject = StudentSched.Pop();
@@ -206,7 +204,7 @@ namespace DSTALGOPROJ1
                                 DisplayMenu();
                                 break;
 
-                            case 2:
+                            case 2: // clears the stack, removing all of the current enlisted subjects
                                 StudentSched.Clear(); 
                                 UnitsStack.Clear(); 
                                 TotUnits = 0;
@@ -219,12 +217,12 @@ namespace DSTALGOPROJ1
                                 DisplayMenu();
                                 break;
 
-                            case 3:
+                            case 3: // goes back to menu
                                 Console.Clear();
                                 DisplayMenu();
                                 break;
 
-                            default:
+                            default: 
                                 Console.WriteLine("Invalid choice. Please select 1, 2, or 3.");
                                 Console.WriteLine("\nPress any key to continue...");
                                 Console.ReadKey();
@@ -234,13 +232,13 @@ namespace DSTALGOPROJ1
                         }
                         break;
 
-                    case 5:
+                    case 5: // displays the enrollable subjects
                         Console.Clear();
-                        if (TotUnits == 0)
+                        if (TotUnits == 0) // checks if there are no subjects, displays error
                         {
-                            Console.WriteLine("No subjects to enlist. Please add subjects first.");
+                            Console.WriteLine("No subjects to enroll. Please add subjects first.");
                         }
-                        else
+                        else // displays finished
                         {
                             Console.WriteLine("You have successfully enlisted the following subjects:");
                             Console.ForegroundColor = ConsoleColor.Green;
@@ -266,7 +264,7 @@ namespace DSTALGOPROJ1
             Console.ReadKey();
         }
 
-        static void DisplayMenu()
+        static void DisplayMenu() // method to display the menu
         {
             Console.WriteLine("============================================================");
             Console.WriteLine("======= Welcome to Student Enrollment System (S.E.S) =======");

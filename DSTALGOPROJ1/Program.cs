@@ -10,6 +10,7 @@ namespace DSTALGOPROJ1
             bool running = true;
             CustomListClass MyList = new CustomListClass();
             UADT StudentSched = new UADT();
+            UADT UnitsStack = new UADT(); // Added: Separate stack for units
             int TotUnits = 0;
 
             string[][] Subjects =
@@ -29,7 +30,6 @@ namespace DSTALGOPROJ1
 
             while (running)
             {
-             
                 Console.Write("\nUser: ");
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 int userchoice = Convert.ToInt32(Console.ReadLine());
@@ -45,7 +45,6 @@ namespace DSTALGOPROJ1
                         Console.Clear();
                         DisplayMenu();
                         break;
-
 
                     case 2:
                         Console.Clear();
@@ -64,8 +63,6 @@ namespace DSTALGOPROJ1
                         Console.Clear();
                         DisplayMenu();
                         break;
-
-
 
                     case 3:
                         Console.Clear();
@@ -89,7 +86,7 @@ namespace DSTALGOPROJ1
                                 Console.ResetColor();
                                 Console.WriteLine($"You can only enroll a maximum of 21 units. Current units: {TotUnits}, \nAttempted to add: {subjectUnits} units.");
                             }
-                            else if (StudentSched.CheckDup(Subjects[subjectchoice - 1][0])) // pass the subject code
+                            else if (StudentSched.CheckDup(Subjects[subjectchoice - 1][0]))
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("You cannot enroll the same subject twice.");
@@ -100,6 +97,7 @@ namespace DSTALGOPROJ1
                                 string selectedSubject = $"{Subjects[subjectchoice - 1][0]} - {Subjects[subjectchoice - 1][1]} ({Subjects[subjectchoice - 1][2]}) - {Subjects[subjectchoice - 1][3]} units";
 
                                 StudentSched.Push(selectedSubject);
+                                UnitsStack.Push(subjectUnits); 
                                 TotUnits += subjectUnits;
                                 Console.WriteLine($"Successfully added: {selectedSubject}");
                                 Console.WriteLine($"Total units enrolled: {TotUnits}/21");
@@ -115,16 +113,13 @@ namespace DSTALGOPROJ1
                         DisplayMenu();
                         break;
 
-
-
-
                     case 4:
                         Console.Clear();
                         Console.WriteLine("Your Current Schedule :");
                         if (TotUnits == 0)
                         {
                             Console.WriteLine("No subjects enrolled yet.");
-                            Console.WriteLine("\nPress any key to exit...");
+                            Console.WriteLine("\nPress any key to continue...");
                             Console.ReadKey();
                             Console.Clear();
                             DisplayMenu();
@@ -143,35 +138,69 @@ namespace DSTALGOPROJ1
 
                         int removeChoice = Convert.ToInt32(Console.ReadLine());
 
-                        switch(removeChoice)
-
+                        switch (removeChoice)
                         {
-
                             case 1:
-                                StudentSched.Pop();
+                                try
+                                {
+                                    object removedSubject = StudentSched.Pop();
+                                    int removedUnits = (int)UnitsStack.Pop(); 
+                                    TotUnits -= removedUnits;
+                                    Console.WriteLine($"Successfully removed: {removedSubject}");
+                                    Console.WriteLine($"Total units enrolled: {TotUnits}/21");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine($"Error: {ex.Message}");
+                                }
 
-                                Console.ReadLine();
+                                Console.WriteLine("\nPress any key to continue...");
+                                Console.ReadKey();
                                 Console.Clear();
                                 DisplayMenu();
                                 break;
+
                             case 2:
-                                
-                                
-                                    StudentSched.Clear();
-                                    Console.Clear();
-                                    Console.WriteLine("All subjects removed successfully.");
-                                    TotUnits = 0;
-                                
-                                Console.ReadLine();
+                                StudentSched.Clear(); 
+                                UnitsStack.Clear(); 
+                                TotUnits = 0;
+                                Console.WriteLine("All subjects removed successfully.");
+                                Console.WriteLine($"Total units enrolled: {TotUnits}/21");
+
+                                Console.WriteLine("\nPress any key to continue...");
+                                Console.ReadKey();
+                                Console.Clear();
+                                DisplayMenu();
+                                break;
+
+                            case 3:
+                                Console.Clear();
+                                DisplayMenu();
+                                break;
+
+                            default:
+                                Console.WriteLine("Invalid choice. Please select 1, 2, or 3.");
+                                Console.WriteLine("\nPress any key to continue...");
+                                Console.ReadKey();
                                 Console.Clear();
                                 DisplayMenu();
                                 break;
                         }
                         break;
+
                     case 5:
                         Console.Clear();
-                        Console.WriteLine("You have succesfully enlisted the following subjects");
-                        StudentSched.PrintStack();
+                        if (TotUnits == 0)
+                        {
+                            Console.WriteLine("No subjects to enlist. Please add subjects first.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("You have successfully enlisted the following subjects:");
+                            StudentSched.PrintStack();
+                            Console.WriteLine($"\nTotal Units Enrolled: {TotUnits}/21");
+                        }
+                        Console.WriteLine("\nThank you for using the Student Enrollment System!");
                         running = false;
                         break;
 
@@ -202,6 +231,7 @@ namespace DSTALGOPROJ1
         }
     }
 }
+
 
 
 

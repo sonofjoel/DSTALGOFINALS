@@ -141,10 +141,37 @@ namespace DSTALGOPROJ1
                         Console.WriteLine("3: Go Back to Main Menu");
                         Console.Write("\nUser: ");
 
+                        int removeChoice = Convert.ToInt32(Console.ReadLine());
+
+                        switch(removeChoice)
+
+                        {
+
+                            case 1:
+                                StudentSched.Pop();
+
+                                Console.ReadLine();
+                                Console.Clear();
+                                DisplayMenu();
+                                break;
+                            case 2:
+                                
+                                
+                                    StudentSched.Clear();
+                                    Console.Clear();
+                                    Console.WriteLine("All subjects removed successfully.");
+                                    TotUnits = 0;
+                                
+                                Console.ReadLine();
+                                Console.Clear();
+                                DisplayMenu();
+                                break;
+                        }
                         break;
                     case 5:
                         Console.Clear();
-                        Console.WriteLine("Thank you for using this program!");
+                        Console.WriteLine("You have succesfully enlisted the following subjects");
+                        StudentSched.PrintStack();
                         running = false;
                         break;
 
@@ -171,7 +198,7 @@ namespace DSTALGOPROJ1
             Console.WriteLine("2: View Student Schedule");
             Console.WriteLine("3: Add Subjects to Schedule");
             Console.WriteLine("4: Remove Subjects");
-            Console.WriteLine("5: Exit Program");
+            Console.WriteLine("5: Enlist Subjects");
         }
     }
 }

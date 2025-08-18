@@ -52,12 +52,15 @@ public class CustomListClass
 
     public void ViewSubjectSchedule(string[][] subjects)
     {
-        Console.WriteLine("--- Available Subjects to Enroll ---");
+        Console.WriteLine("===========================================================");
+        Console.WriteLine("============== Available Subjects to Enroll ===============");
+        Console.WriteLine("===========================================================");
         for (int i = 0; i < subjects.Length; i++)
         {
-            Console.WriteLine($"{i + 1}. {subjects[i][0]} - {subjects[i][1]}");
+            Console.WriteLine($"{i + 1}. {subjects[i][0]} - {subjects[i][1]} ({subjects[i][2]}) - {subjects[i][3]} units");
         }
     }
+
 
     public string GetList()
     {

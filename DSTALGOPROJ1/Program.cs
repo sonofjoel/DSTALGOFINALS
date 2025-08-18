@@ -20,7 +20,8 @@ namespace DSTALGOPROJ1
                 new string[] {"MATHWRLD", "Mathematics in the Modern World", "W 11:20AM - 2:40PM", "3"},
                 new string[] {"SCITECH", "Science Technology and Society", "H 8:00AM - 11:00AM", "3"},
                 new string[] {"CSBLIFE", "Computer Science and Life", "F 2:40PM - 5:40PM", "2"},
-                new string[] {"NSTP01", "National Service Training Program 1", "T 8:00AM - 11:00AM", "3"}
+                new string[] {"NSTP01", "National Service Training Program 1", "T 8:00AM - 11:00AM", "3"},
+                new string[] {"DSTALGO", "Data Structure and Algorithms", "T 11:20AM - 2:20PM", "3"}
             };
 
             Console.Clear();
@@ -28,8 +29,11 @@ namespace DSTALGOPROJ1
 
             while (running)
             {
+             
                 Console.Write("\nUser: ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 int userchoice = Convert.ToInt32(Console.ReadLine());
+                Console.ResetColor();
 
                 switch (userchoice)
                 {
@@ -41,6 +45,7 @@ namespace DSTALGOPROJ1
                         Console.Clear();
                         DisplayMenu();
                         break;
+
 
                     case 2:
                         Console.Clear();
@@ -60,6 +65,8 @@ namespace DSTALGOPROJ1
                         DisplayMenu();
                         break;
 
+
+
                     case 3:
                         Console.Clear();
                         Console.WriteLine("Please choose a subject to add: ");
@@ -77,7 +84,10 @@ namespace DSTALGOPROJ1
 
                             if (TotUnits + subjectUnits > 21)
                             {
-                                Console.WriteLine($"Error: You can only enroll a maximum of 21 units. Current units: {TotUnits}, Attempted to add: {subjectUnits} units.");
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("ERROR!");
+                                Console.ResetColor();
+                                Console.WriteLine($"You can only enroll a maximum of 21 units. Current units: {TotUnits}, \nAttempted to add: {subjectUnits} units.");
                             }
                             else
                             {
@@ -100,26 +110,33 @@ namespace DSTALGOPROJ1
                         break;
 
 
+
+
                     case 4:
-                    //still not sure how we will use this sa app - Joel
-
-
-                    case 5:
                         Console.Clear();
                         Console.WriteLine("Your Current Schedule :");
                         if (TotUnits == 0)
                         {
                             Console.WriteLine("No subjects enrolled yet.");
+                            Console.WriteLine("\nPress any key to exit...");
+                            Console.ReadKey();
+                            Console.Clear();
+                            DisplayMenu();
+                            break;
                         }
                         else
                         {
                             StudentSched.PrintStack();
                         }
                         Console.WriteLine($"\nTotal Units Enrolled: {TotUnits}/21");
-                        //menu to remove all or subject at the top of stack
+                        Console.WriteLine("\nRemove Options:");
+                        Console.WriteLine("1: Remove Last Added Subject (Top of Stack)");
+                        Console.WriteLine("2: Remove All Subjects");
+                        Console.WriteLine("3: Go Back to Main Menu");
+                        Console.Write("\nUser: ");
 
                         break;
-                    case 6:
+                    case 5:
                         Console.Clear();
                         Console.WriteLine("Thank you for using this program!");
                         running = false;
@@ -147,9 +164,8 @@ namespace DSTALGOPROJ1
             Console.WriteLine("1: View Subject Schedule");
             Console.WriteLine("2: View Student Schedule");
             Console.WriteLine("3: Add Subjects to Schedule");
-            Console.WriteLine("4: Change Year Term and ID");
-            Console.WriteLine("5: Remove Subjects");
-            Console.WriteLine("6: Exit Program");
+            Console.WriteLine("4: Remove Subjects");
+            Console.WriteLine("5: Exit Program");
         }
     }
 }

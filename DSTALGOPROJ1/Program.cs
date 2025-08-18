@@ -89,6 +89,12 @@ namespace DSTALGOPROJ1
                                 Console.ResetColor();
                                 Console.WriteLine($"You can only enroll a maximum of 21 units. Current units: {TotUnits}, \nAttempted to add: {subjectUnits} units.");
                             }
+                            else if (StudentSched.CheckDup(Subjects[subjectchoice - 1][0])) // pass the subject code
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("You cannot enroll the same subject twice.");
+                                Console.ResetColor();
+                            }
                             else
                             {
                                 string selectedSubject = $"{Subjects[subjectchoice - 1][0]} - {Subjects[subjectchoice - 1][1]} ({Subjects[subjectchoice - 1][2]}) - {Subjects[subjectchoice - 1][3]} units";

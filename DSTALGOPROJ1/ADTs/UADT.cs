@@ -73,5 +73,17 @@
                 Console.WriteLine(array[i]);
             }
         }
+
+        public bool CheckDup(string subjectCode)
+        {
+            for (int i = top; i >= 0; i--)
+            {
+                if (array[i].ToString().StartsWith(subjectCode))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

@@ -224,7 +224,7 @@ namespace DSTALGOPROJ1
             Console.WriteLine("======= Welcome to Student Enrollment System (S.E.S) =======");
             Console.WriteLine("============================================================");
             Console.WriteLine("1: View Subject Schedule");
-            Console.WriteLine("2: View Student Schedule");
+            Console.WriteLine("2: View Enrolled Subjects");
             Console.WriteLine("3: Add Subjects to Schedule");
             Console.WriteLine("4: Remove Subjects");
             Console.WriteLine("5: Enlist Subjects");

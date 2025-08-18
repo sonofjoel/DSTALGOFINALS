@@ -57,7 +57,11 @@ namespace DSTALGOPROJ1
                         {
                             StudentSched.PrintStack();
                         }
-                        Console.WriteLine($"\nTotal Units Enrolled: {TotUnits}/21");
+                        Console.WriteLine("\nTotal Units Enrolled: ");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write(TotUnits);
+                        Console.Write("/21");
+                        Console.ResetColor();
                         Console.WriteLine("\nPress any key to continue...");
                         Console.ReadKey();
                         Console.Clear();
@@ -72,8 +76,11 @@ namespace DSTALGOPROJ1
                         {
                             Console.WriteLine($"{i + 1}. {Subjects[i][0]} - {Subjects[i][1]} ({Subjects[i][2]}) - {Subjects[i][3]} units");
                         }
+
                         Console.Write("\nUser: ");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
                         int subjectchoice = Convert.ToInt32(Console.ReadLine());
+                        Console.ResetColor();
 
                         if (subjectchoice >= 1 && subjectchoice <= Subjects.Length)
                         {
@@ -99,8 +106,15 @@ namespace DSTALGOPROJ1
                                 StudentSched.Push(selectedSubject);
                                 UnitsStack.Push(subjectUnits); 
                                 TotUnits += subjectUnits;
-                                Console.WriteLine($"Successfully added: {selectedSubject}");
-                                Console.WriteLine($"Total units enrolled: {TotUnits}/21");
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine($"Successfully added: ");
+                                Console.ResetColor();
+                                Console.Write(selectedSubject);
+                                Console.Write(" Total units enrolled: ");
+                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.Write(TotUnits);
+                                Console.Write("/21");
+                                Console.ResetColor();
                             }
                         }
                         else
@@ -129,14 +143,21 @@ namespace DSTALGOPROJ1
                         {
                             StudentSched.PrintStack();
                         }
-                        Console.WriteLine($"\nTotal Units Enrolled: {TotUnits}/21");
+                        Console.WriteLine($"\nTotal Units Enrolled: ");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write(TotUnits);
+                        Console.Write("/21");
+                        Console.ResetColor();
                         Console.WriteLine("\nRemove Options:");
                         Console.WriteLine("1: Remove Last Added Subject (Top of Stack)");
                         Console.WriteLine("2: Remove All Subjects");
                         Console.WriteLine("3: Go Back to Main Menu");
                         Console.Write("\nUser: ");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        
 
                         int removeChoice = Convert.ToInt32(Console.ReadLine());
+                        Console.ResetColor();
 
                         switch (removeChoice)
                         {
@@ -146,8 +167,15 @@ namespace DSTALGOPROJ1
                                     object removedSubject = StudentSched.Pop();
                                     int removedUnits = (int)UnitsStack.Pop(); 
                                     TotUnits -= removedUnits;
-                                    Console.WriteLine($"Successfully removed: {removedSubject}");
-                                    Console.WriteLine($"Total units enrolled: {TotUnits}/21");
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine($"Successfully removed: ");
+                                    Console.ResetColor();
+                                    Console.Write(removedSubject);
+                                    Console.Write($" Total units enrolled: ");
+                                    Console.ForegroundColor = ConsoleColor.Yellow;
+                                    Console.Write(TotUnits);
+                                    Console.Write("/21");
+                                    Console.ResetColor();
                                 }
                                 catch (Exception ex)
                                 {

@@ -51,13 +51,13 @@ namespace DSTALGOPROJ1
                         Console.WriteLine("Your Current Schedule :");
                         if (TotUnits == 0)
                         {
-                            Console.WriteLine("No subjects enrolled yet.");
+                            Console.WriteLine("No subjects enlisted yet.");
                         }
                         else
                         {
                             StudentSched.PrintStack();
                         }
-                        Console.WriteLine("\nTotal Units Enrolled: ");
+                        Console.WriteLine("\nTotal Units Enlisted: ");
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.Write(TotUnits);
                         Console.Write("/21");
@@ -79,8 +79,22 @@ namespace DSTALGOPROJ1
 
                         Console.Write("\nUser: ");
                         Console.ForegroundColor = ConsoleColor.Cyan;
-                        int subjectchoice = Convert.ToInt32(Console.ReadLine());
+                        string input = Console.ReadLine();
                         Console.ResetColor();
+
+                        if (string.IsNullOrWhiteSpace(input))
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("You must enter a number.");
+                            Console.ResetColor();
+                            Console.WriteLine("\nPress any key to continue...");
+                            Console.ReadKey();
+                            Console.Clear();
+                            DisplayMenu();
+                            break;
+                        }
+
+                        int subjectchoice = Convert.ToInt32(input);
 
                         if (subjectchoice >= 1 && subjectchoice <= Subjects.Length)
                         {
@@ -91,12 +105,12 @@ namespace DSTALGOPROJ1
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("ERROR!");
                                 Console.ResetColor();
-                                Console.WriteLine($"You can only enroll a maximum of 21 units. Current units: {TotUnits}, \nAttempted to add: {subjectUnits} units.");
+                                Console.WriteLine($"You can only enlist a maximum of 21 units. Current units: {TotUnits}, \nAttempted to add: {subjectUnits} units.");
                             }
                             else if (StudentSched.CheckDup(Subjects[subjectchoice - 1][0]))
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("You cannot enroll the same subject twice.");
+                                Console.WriteLine("You cannot enlist the same subject twice.");
                                 Console.ResetColor();
                             }
                             else
@@ -104,7 +118,7 @@ namespace DSTALGOPROJ1
                                 string selectedSubject = $"{Subjects[subjectchoice - 1][0]} - {Subjects[subjectchoice - 1][1]} ({Subjects[subjectchoice - 1][2]}) - {Subjects[subjectchoice - 1][3]} units";
 
                                 StudentSched.Push(selectedSubject);
-                                UnitsStack.Push(subjectUnits); 
+                                UnitsStack.Push(subjectUnits);
                                 TotUnits += subjectUnits;
                                 Console.ForegroundColor = ConsoleColor.Green;
                                 Console.WriteLine($"Successfully added: ");
@@ -119,20 +133,24 @@ namespace DSTALGOPROJ1
                         }
                         else
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Invalid choice. Please select a valid subject number.");
+                            Console.ResetColor();
                         }
+
                         Console.WriteLine("\nPress any key to continue...");
                         Console.ReadKey();
                         Console.Clear();
                         DisplayMenu();
                         break;
 
+
                     case 4:
                         Console.Clear();
                         Console.WriteLine("Your Current Schedule :");
                         if (TotUnits == 0)
                         {
-                            Console.WriteLine("No subjects enrolled yet.");
+                            Console.WriteLine("No subjects enlisted yet.");
                             Console.WriteLine("\nPress any key to continue...");
                             Console.ReadKey();
                             Console.Clear();
@@ -143,7 +161,7 @@ namespace DSTALGOPROJ1
                         {
                             StudentSched.PrintStack();
                         }
-                        Console.WriteLine($"\nTotal Units Enrolled: ");
+                        Console.WriteLine($"\nTotal Units Enlisted: ");
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.Write(TotUnits);
                         Console.Write("/21");
@@ -225,7 +243,9 @@ namespace DSTALGOPROJ1
                         else
                         {
                             Console.WriteLine("You have successfully enlisted the following subjects:");
+                            Console.ForegroundColor = ConsoleColor.Green;
                             StudentSched.PrintStack();
+                            Console.ResetColor();
                             Console.WriteLine($"\nTotal Units Enrolled: {TotUnits}/21");
                         }
                         Console.WriteLine("\nThank you for using the Student Enrollment System!");
@@ -252,37 +272,10 @@ namespace DSTALGOPROJ1
             Console.WriteLine("======= Welcome to Student Enrollment System (S.E.S) =======");
             Console.WriteLine("============================================================");
             Console.WriteLine("1: View Subject Schedule");
-            Console.WriteLine("2: View Enrolled Subjects");
+            Console.WriteLine("2: View Enlisted Subjects");
             Console.WriteLine("3: Add Subjects to Schedule");
             Console.WriteLine("4: Remove Subjects");
-            Console.WriteLine("5: Enlist Subjects");
+            Console.WriteLine("5: Enrolled Subjects");
         }
     }
 }
-
-
-
-
-
-// Subject Schedule visual (not sure pa) ;-;
-/*
- 
-Current Schedule:
-
-ISPRGG - M 8:00 - 11:00 (this is sample data)
-
-Slot 2
-
-Slot 3
-
-Slot 4
-
-Slot 5
-
-Slot 6
-
-Slot 7
-
-Slot 8
-
- */
